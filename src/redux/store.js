@@ -13,8 +13,6 @@ import {
 import logger from 'redux-logger';
 import storage from 'redux-persist/lib/storage'; // defaults to localStorage for web
 import { contactsReducer } from './contacts/contacts-reducer';
-// import { authReducer } from './auth/auth-slice';
-// import { default as authReducer } from './auth/auth-slice';
 import authReducer from './auth/auth-slice';
 
 const middleware = getDefaultMiddleware => [

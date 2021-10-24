@@ -3,7 +3,7 @@ import { Toaster } from 'react-hot-toast';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { Switch, Route } from 'react-router-dom';
-import { fetchContacts } from 'redux/contacts/contacts-operations';
+// import { fetchContacts } from 'redux/contacts/contacts-operations';
 import AppBar from './AppBar';
 // import HomeView from './views/HomeView';
 import HomeView from 'views/HomeView';
@@ -11,18 +11,18 @@ import RegisterView from 'views/RegisterView';
 import LoginView from 'views/LoginView';
 import ContactsView from 'views/ContactsView';
 import Container from './Container';
-import { register, logIn } from '../redux/auth/auth-operations';
-
-import ContactForm from './ContactForm';
-import ContactList from './ContactList';
-import Filter from './Filter';
+// import { register, logIn } from '../redux/auth/auth-operations';
+import { fetchCurrentUser } from '../redux/auth/auth-operations';
+// import ContactForm from './ContactForm';
+// import ContactList from './ContactList';
+// import Filter from './Filter';
 
 export default function App() {
-    // const dispatch = useDispatch();
+    const dispatch = useDispatch();
   
-    // useEffect(() => {
-    //   dispatch(authOperations.fetchCurrentUser());
-    // }, [dispatch]);
+    useEffect(() => {
+      dispatch(fetchCurrentUser());
+    }, [dispatch]);
   
     return (
       <Container>
@@ -32,7 +32,7 @@ export default function App() {
           <Route exact path="/" component={HomeView} />
           <Route path="/register" component={RegisterView} />
           <Route path="/login" component={LoginView} />
-          <Route path="/todos" component={ContactsView} />
+          <Route path="/contacts" component={ContactsView} />
         </Switch>
       </Container>
     );

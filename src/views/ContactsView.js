@@ -1,13 +1,17 @@
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import Container from "components/Container";
 import { Toaster } from 'react-hot-toast';
 import ContactForm from "components/ContactForm";
 import Filter from "components/Filter";
 import ContactList from "components/ContactList";
+import { fetchContacts } from 'redux/contacts/contacts-operations';
+
 
 export default function ContactsView() {
-    // const dispatch = useDispatch();
+    const dispatch = useDispatch();
 
-    // useEffect(() => dispatch(fetchContacts()), [dispatch]);
+    useEffect(() => dispatch(fetchContacts()), [dispatch]);
 
     return (
         <Container>

@@ -12,7 +12,7 @@ import axios from 'axios';
 //   fetchContactsError,
 // } from './contacts-actions';
 
-axios.defaults.baseURL = 'http://localhost:4040';
+// axios.defaults.baseURL = 'https://connections-api.herokuapp.com/';
 
 export const fetchContacts = createAsyncThunk(
   'contacts/fetchContacts',
@@ -65,11 +65,6 @@ export const deleteContact = createAsyncThunk(
 //   } catch (error) {
 //     dispatch(fetchContactsError(error));
 //   }
-
-//   // axios
-//   //     .get('/contacts')
-//   //     .then(({ data }) => dispatch(fetchContactsSuccess(data)))
-//   //     .catch(error => dispatch(fetchContactsError(error)));
 // };
 
 // export const addContact =
@@ -88,15 +83,6 @@ export const deleteContact = createAsyncThunk(
 //     } catch (error) {
 //       dispatch(addContactError(error));
 //     }
-
-//     // axios
-//     //     .post('/contacts', contact)
-//     //     .then(({ data }) =>
-//     //         dispatch(addContactSuccess(data)),
-//     //     )
-//     //     .catch(error =>
-//     //         dispatch(addContactError(error))
-//     //     );
 //   };
 
 // export const deleteContact = contactId => async dispatch => {
@@ -108,9 +94,4 @@ export const deleteContact = createAsyncThunk(
 //   } catch (error) {
 //     dispatch(deleteContactError(error));
 //   }
-
-//   // axios
-//   //     .delete(`/contacts/${contactId}`)
-//   //     .then(() => dispatch(deleteContactSuccess(contactId)))
-//   //     .catch(error => dispatch(deleteContactError(error)));
 // };

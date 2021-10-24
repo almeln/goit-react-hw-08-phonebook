@@ -39,4 +39,28 @@ export const logOut = createAsyncThunk('auth/logout', async () => {
     } catch (error) {
         // TODO: Добавить обработку ошибки error.message
     }
-})
+});
+
+export const fetchCurrentUser = createAsyncThunk(
+    'auth/refresh',
+    async (_, thunkAPI) => {
+        const state = thunkAPI.getState();
+        const persistedToken = state.auth.token;
+
+        if (persistedToken === null) {
+            console.log('No token!');
+            // return thunkAPI.rejectWithValue(5);
+            return state;
+        }
+
+        token.set(persistedToken);
+        try {
+            const { data } = await axios.get('/users/current');
+            return data;
+        } catch (error) {
+            // TODO: Добавить обработку ошибки error.message
+        }
+    }
+)
+
+
