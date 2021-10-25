@@ -1,21 +1,22 @@
 import React from 'react';
-import { Toaster } from 'react-hot-toast';
-import { useEffect } from 'react';
+import { useEffect, Suspense, lazy } from 'react';
 import { useDispatch } from 'react-redux';
 import { Switch, Route } from 'react-router-dom';
-// import { fetchContacts } from 'redux/contacts/contacts-operations';
 import AppBar from './AppBar';
-// import HomeView from './views/HomeView';
-import HomeView from 'views/HomeView';
-import RegisterView from 'views/RegisterView';
-import LoginView from 'views/LoginView';
-import ContactsView from 'views/ContactsView';
+// import HomeView from 'views/HomeView';
+// import RegisterView from 'views/RegisterView';
+// import LoginView from 'views/LoginView';
+// import ContactsView from 'views/ContactsView';
 import Container from './Container';
-// import { register, logIn } from '../redux/auth/auth-operations';
 import { fetchCurrentUser } from '../redux/auth/auth-operations';
-// import ContactForm from './ContactForm';
-// import ContactList from './ContactList';
-// import Filter from './Filter';
+import PrivateRoute from './PrivateRoute';
+import PublicRoute from './PublicRoute';
+
+const HomeView = lazy(() => import('views/HomeView'));
+const RegisterView = lazy(() => import('views/RegisterView'));
+const LoginView = lazy(() => import('views/LoginView'));
+const ContactsView = lazy(() => import('views/ContactsView'));
+// const UploadView = lazy(() => import('views/UploadView'));
 
 export default function App() {
     const dispatch = useDispatch();
@@ -29,29 +30,25 @@ export default function App() {
         <AppBar />
   
         <Switch>
-          <Route exact path="/" component={HomeView} />
-          <Route path="/register" component={RegisterView} />
-          <Route path="/login" component={LoginView} />
-          <Route path="/contacts" component={ContactsView} />
+          <Suspense fallback={<p>Loading...</p>}>
+            <PublicRoute exact path="/">
+              <HomeView/>
+            </PublicRoute>
+            <PublicRoute exact path="/register" restricted>
+              <RegisterView/>
+            </PublicRoute>
+            <PublicRoute exact path="/login" restricted redirectTo="/contacts">
+              <LoginView/>
+            </PublicRoute>
+            {/* <Route exact path="/" component={HomeView} /> */}
+            {/* <Route path="/register" component={RegisterView} /> */}
+            {/* <Route path="/login" component={LoginView} /> */}
+            <PrivateRoute path="/contacts" redirectTo="/login">
+              <ContactsView />
+            </PrivateRoute>         
+            {/* <Route path="/contacts" component={ContactsView} /> */}
+          </Suspense>
         </Switch>
       </Container>
     );
-  }
-
-// export default function App() {
-//     const dispatch = useDispatch();
-
-//     useEffect(() => dispatch(fetchContacts()), [dispatch]);
-
-//     return (
-//         <Container>
-//             <Toaster/>
-//             <h1>Phonebook</h1>
-//             <ContactForm></ContactForm>
-//             {/* <ContactForm onSubmit={formSubmitHandler}></ContactForm> */}
-//             <h2>Contacts</h2>
-//             <Filter></Filter>
-//             <ContactList></ContactList>
-//         </Container>
-//     )
-// }
+  };
