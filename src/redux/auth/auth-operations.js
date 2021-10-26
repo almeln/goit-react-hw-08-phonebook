@@ -10,7 +10,7 @@ const token = {
     unset() {
         axios.defaults.headers.common.Authorization = '';
     },
-}
+};
 
 export const register = createAsyncThunk('auth/register', async credentials => {
     try {
@@ -49,8 +49,7 @@ export const fetchCurrentUser = createAsyncThunk(
 
         if (persistedToken === null) {
             console.log('No token!');
-            // return thunkAPI.rejectWithValue(5);
-            return state;
+            return thunkAPI.rejectWithValue();
         }
 
         token.set(persistedToken);

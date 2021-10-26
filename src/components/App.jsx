@@ -1,6 +1,6 @@
 import React from 'react';
 import { useEffect, Suspense, lazy } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Switch, Route } from 'react-router-dom';
 import AppBar from './AppBar';
 // import HomeView from 'views/HomeView';
@@ -11,6 +11,7 @@ import Container from './Container';
 import { fetchCurrentUser } from '../redux/auth/auth-operations';
 import PrivateRoute from './PrivateRoute';
 import PublicRoute from './PublicRoute';
+import authSelectors from 'redux/auth/auth-selectors';
 
 const HomeView = lazy(() => import('views/HomeView'));
 const RegisterView = lazy(() => import('views/RegisterView'));
@@ -20,13 +21,15 @@ const ContactsView = lazy(() => import('views/ContactsView'));
 
 export default function App() {
     const dispatch = useDispatch();
+    const isFetchingCurrentUser = useSelector(authSelectors.getIsFetchingCurrentUser);
   
     useEffect(() => {
       dispatch(fetchCurrentUser());
     }, [dispatch]);
   
     return (
-      <Container>
+      !isFetchingCurrentUser && (
+        <Container>
         <AppBar />
   
         <Switch>
@@ -37,7 +40,7 @@ export default function App() {
             <PublicRoute exact path="/register" restricted>
               <RegisterView/>
             </PublicRoute>
-            <PublicRoute exact path="/login" restricted redirectTo="/contacts">
+            <PublicRoute exact path="/login" redirectTo="/contacts" restricted>
               <LoginView/>
             </PublicRoute>
             {/* <Route exact path="/" component={HomeView} /> */}
@@ -49,6 +52,7 @@ export default function App() {
             {/* <Route path="/contacts" component={ContactsView} /> */}
           </Suspense>
         </Switch>
-      </Container>
+        </Container>
+      )
     );
   };
