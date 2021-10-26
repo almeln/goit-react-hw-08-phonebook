@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-// import PropTypes from 'prop-types';
 import { useSelector, useDispatch } from 'react-redux';
 import toast from 'react-hot-toast';
 
@@ -11,8 +10,6 @@ import css from './ContactForm.module.css';
 export default function ContactForm() {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
-
-  // useSelector вместо mapStateToProps
   const contacts = useSelector(getItems);
 
   const dispatch = useDispatch();
@@ -49,7 +46,6 @@ export default function ContactForm() {
     }
 
     dispatch(addContact({ name, number }));
-    // onSubmit({ name, number });
     reset();
   };
 
@@ -92,17 +88,3 @@ export default function ContactForm() {
     </form>
   );
 }
-
-// const mapStateToProps = state => ({
-//   contacts: state.contacts.items,
-// });
-
-// const mapDispatchToProps = dispatch => ({
-//   onSubmit: data => dispatch(addContact(data)),
-// });
-
-// ContactForm.propTypes = {
-//   onSubmit: PropTypes.func.isRequired,
-// };
-
-// export default connect(mapStateToProps, mapDispatchToProps)(ContactForm);

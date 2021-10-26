@@ -18,7 +18,6 @@ export default function ContactsView() {
             <Toaster/>
             <h1>Phonebook</h1>
             <ContactForm></ContactForm>
-            {/* <ContactForm onSubmit={formSubmitHandler}></ContactForm> */}
             <h2>Contacts</h2>
             <Filter></Filter>
             <ContactList></ContactList>

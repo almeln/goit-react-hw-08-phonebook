@@ -1,13 +1,6 @@
 import { combineReducers } from 'redux';
 import { createReducer } from '@reduxjs/toolkit';
 import {
-  fetchContactsSuccess,
-  addContactSuccess,
-  deleteContactSuccess,
-  fetchContactsRequest,
-  fetchContactsError,
-} from './contacts-actions';
-import {
   fetchContacts,
   addContact,
   deleteContact,
@@ -42,6 +35,14 @@ const error = createReducer(null, {
   [fetchContacts.pending]: () => null,
 });
 
+export const contactsReducer = combineReducers({
+  items: itemsReducer,
+  filter: filterReducer,
+  isLoading,
+  error,
+});
+
+
 // without createAsyncChunk
 
 // const itemsReducer = createReducer([], {
@@ -65,10 +66,3 @@ const error = createReducer(null, {
 //   [fetchContactsError]: (_, action) => action.payload,
 //   [fetchContactsRequest]: () => null,
 // });
-
-export const contactsReducer = combineReducers({
-  items: itemsReducer,
-  filter: filterReducer,
-  isLoading,
-  error,
-});
