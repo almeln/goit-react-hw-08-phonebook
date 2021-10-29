@@ -1,5 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Button from 'react-bootstrap/Button';
+
 
 import css from './ContactItem.module.css';
 
@@ -8,9 +10,9 @@ const ContactItem = ({ name, number, onDelete }) => (
     <p>
       <span className={css.contactItemName}>{name}:</span>
       <span className={css.contactItemNumber}>{number}</span>
-      <button type="button" className={css.deleteBtn} onClick={onDelete}>
+      <Button variant="outline-primary" type="button" onClick={onDelete}>
         Delete
-      </button>
+      </Button>
     </p>
   </>
 );

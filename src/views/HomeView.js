@@ -1,23 +1,10 @@
 import React from 'react';
-
-const styles = {
-  container: {
-    minHeight: 'calc(100vh - 50px)',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  title: {
-    fontWeight: 500,
-    fontSize: 48,
-    textAlign: 'center',
-  },
-};
+import css from './Views.module.css';
 
 const HomeView = () => (
-  <div style={styles.container}>
-    <h1 style={styles.title}>
-      Приветственная страница нашего сервиса{' '}
+  <div className={css.container}>
+    <h1 className={css.title}>
+      Welcome! This app will help you to be up-to-date with the contacts in your phonebook!{' '}
       <span role="img" aria-label="Иконка приветствия">
         💁‍♀️
       </span>

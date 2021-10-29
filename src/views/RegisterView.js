@@ -1,17 +1,9 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { register } from 'redux/auth/auth-operations';
-
-const styles = {
-  form: {
-    width: 320,
-  },
-  label: {
-    display: 'flex',
-    flexDirection: 'column',
-    marginBottom: 15,
-  },
-};
+import Form from 'react-bootstrap/Form';
+import Button from 'react-bootstrap/Button';
+import css from './Views.module.css';
 
 export default function RegisterView() {
   const dispatch = useDispatch();
@@ -42,36 +34,24 @@ export default function RegisterView() {
 
   return (
     <div>
-      <h1>Страница регистрации</h1>
+      <h1 className={css.title}>Registration</h1>
 
-      <form onSubmit={handleSubmit} style={styles.form} autoComplete="off">
-        <label style={styles.label}>
-          Имя
-          <input type="text" name="name" value={name} onChange={handleChange} />
-        </label>
+      <Form onSubmit={handleSubmit} className={css.form} autoComplete="off">
+        <Form.Group className="mb-3" controlId="formGroupName">
+          <Form.Label>Name</Form.Label>
+          <Form.Control type="text" name="name" value={name} onChange={handleChange} placeholder="Enter your name" />
+        </Form.Group>
+        <Form.Group className="mb-3" controlId="formGroupEmail">
+          <Form.Label>Email address</Form.Label>
+          <Form.Control type="email" value={email} name="email" onChange={handleChange}placeholder="Enter email" />
+        </Form.Group>
+        <Form.Group className="mb-3" controlId="formGroupPassword">
+          <Form.Label>Password</Form.Label>
+          <Form.Control type="password" value={password} name="password" onChange={handleChange} placeholder="Password" />
+        </Form.Group>
+        <Button type="submit" className={css.button}>Register</Button>
 
-        <label style={styles.label}>
-          Почта
-          <input
-            type="email"
-            name="email"
-            value={email}
-            onChange={handleChange}
-          />
-        </label>
-
-        <label style={styles.label}>
-          Пароль
-          <input
-            type="password"
-            name="password"
-            value={password}
-            onChange={handleChange}
-          />
-        </label>
-
-        <button type="submit">Зарегистрироваться</button>
-      </form>
+      </Form>
     </div>
   );
 }

@@ -1,17 +1,9 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { logIn } from 'redux/auth/auth-operations';
-
-const styles = {
-  form: {
-    width: 320,
-  },
-  label: {
-    display: 'flex',
-    flexDirection: 'column',
-    marginBottom: 15,
-  },
-};
+import Form from 'react-bootstrap/Form';
+import Button from 'react-bootstrap/Button';
+import css from './Views.module.css';
 
 export default function LoginView() {
   const dispatch = useDispatch();
@@ -38,31 +30,20 @@ export default function LoginView() {
 
   return (
     <div>
-      <h1>Страница логина</h1>
+      <h1 className={css.title}>Log In</h1>
 
-      <form onSubmit={handleSubmit} style={styles.form} autoComplete="off">
-        <label style={styles.label}>
-          Почта
-          <input
-            type="email"
-            name="email"
-            value={email}
-            onChange={handleChange}
-          />
-        </label>
+      <Form onSubmit={handleSubmit} className={css.form} autoComplete="off">
+        <Form.Group className="mb-3" controlId="formGroupEmail">
+          <Form.Label>Email address</Form.Label>
+          <Form.Control type="email" value={email} name="email" onChange={handleChange} placeholder="Enter email" />
+        </Form.Group>
+        <Form.Group className="mb-3" controlId="formGroupPassword">
+          <Form.Label>Password</Form.Label>
+          <Form.Control type="password" value={password} name="password" onChange={handleChange} placeholder="Password" />
+        </Form.Group>
+        <Button type="submit" className={css.button}>Log In</Button>
 
-        <label style={styles.label}>
-          Пароль
-          <input
-            type="password"
-            name="password"
-            value={password}
-            onChange={handleChange}
-          />
-        </label>
-
-        <button type="submit">Войти</button>
-      </form>
+      </Form>
     </div>
   );
 }

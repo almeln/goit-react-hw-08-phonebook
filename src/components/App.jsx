@@ -3,7 +3,8 @@ import { useEffect, Suspense, lazy } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Switch } from 'react-router-dom';
 import AppBar from './AppBar';
-import Container from './Container';
+// import Container from './Container';
+import Container from 'react-bootstrap/Container'
 import { fetchCurrentUser } from '../redux/auth/auth-operations';
 import PrivateRoute from './PrivateRoute';
 import PublicRoute from './PublicRoute';
@@ -24,9 +25,9 @@ export default function App() {
   
     return (
       !isFetchingCurrentUser && (
-        <Container>
+        <>
         <AppBar />
-  
+        <Container>  
         <Switch>
           <Suspense fallback={<p>Loading...</p>}>
             <PublicRoute exact path="/">
@@ -44,6 +45,7 @@ export default function App() {
           </Suspense>
         </Switch>
         </Container>
+        </>
       )
     );
   };

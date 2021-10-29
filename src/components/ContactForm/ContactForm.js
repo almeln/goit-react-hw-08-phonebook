@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import toast from 'react-hot-toast';
+import Form from 'react-bootstrap/Form';
+import Button from 'react-bootstrap/Button';
 
 import { addContact } from 'redux/contacts/contacts-operations';
 import { getItems } from 'redux/contacts/contacts-selectors';
@@ -55,11 +57,11 @@ export default function ContactForm() {
   };
 
   return (
-    <form className={css.form} onSubmit={handleSubmit}>
-      <label className={css.formInputLabel}>
-        Name
-        <input
-          className={css.formInput}
+    <>
+      <Form className={css.form} onSubmit={handleSubmit}>
+        <Form.Group className="mb-3" controlId="formGroupName">
+          <Form.Label>Name</Form.Label>
+          <Form.Control className={css.formInput}
           type="text"
           name="name"
           value={name}
@@ -67,12 +69,12 @@ export default function ContactForm() {
           pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
           title="Имя может состоять только из букв, апострофа, тире и пробелов. Например Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan и т. п."
           required
-        />
-      </label>
-      <label className={css.formInputLabel}>
-        Number
-        <input
-          className={css.formInput}
+          placeholder="Enter name"
+          />
+        </Form.Group>
+        <Form.Group className="mb-3" controlId="formGroupNumber">
+          <Form.Label>Number</Form.Label>
+          <Form.Control className={css.formInput}
           type="tel"
           name="number"
           value={number}
@@ -80,11 +82,11 @@ export default function ContactForm() {
           pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
           title="Номер телефона должен состоять цифр и может содержать пробелы, тире, круглые скобки и может начинаться с +"
           required
-        />
-      </label>
-      <button className={css.formInputBtn} type="submit">
-        Add contact
-      </button>
-    </form>
+          placeholder="Enter number" />
+        </Form.Group>
+        <Button type="submit" className={css.formInputBtn}>Add contact</Button>
+
+      </Form>
+    </>
   );
 }
