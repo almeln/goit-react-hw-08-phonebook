@@ -39,15 +39,33 @@ export default function RegisterView() {
       <Form onSubmit={handleSubmit} className={css.form} autoComplete="off">
         <Form.Group className="mb-3" controlId="formGroupName">
           <Form.Label>Name</Form.Label>
-          <Form.Control type="text" name="name" value={name} onChange={handleChange} placeholder="Enter your name" />
+          <Form.Control
+            type="text"
+            name="name"
+            value={name}
+            onChange={handleChange}
+            placeholder="Enter your name"
+            required/>
         </Form.Group>
         <Form.Group className="mb-3" controlId="formGroupEmail">
           <Form.Label>Email address</Form.Label>
-          <Form.Control type="email" value={email} name="email" onChange={handleChange}placeholder="Enter email" />
+          <Form.Control
+            type="email"
+            value={email}
+            name="email"
+            onChange={handleChange}
+            placeholder="Enter email"
+            required />
         </Form.Group>
         <Form.Group className="mb-3" controlId="formGroupPassword">
           <Form.Label>Password</Form.Label>
-          <Form.Control type="password" value={password} name="password" onChange={handleChange} placeholder="Password" />
+          <Form.Control
+            type="password"
+            value={password} 
+            name="password" 
+            onChange={handleChange} 
+            placeholder="Password"
+            required />
         </Form.Group>
         <Button type="submit" className={css.button}>Register</Button>
 
